@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ayah</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --cream: #faf8f4;
+      --sand: #e8e0d0;
+      --terracotta: #c8714a;
+      --deep: #2c2420;
+      --muted: #7a6e68;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--cream);
+      color: var(--deep);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ââ NAV ââ */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding: 1.4rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+      background: rgba(250, 248, 244, 0.88);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(200, 113, 74, 0.12);
+    }
+
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      color: var(--deep);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.82rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.25s;
+    }
+
+    .nav-links a:hover {
+      color: var(--terracotta);
+    }
+
+    /* ââ HERO ââ */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 6rem 2rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 60% at 50% 40%, rgba(200,113,74,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      max-width: 700px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.78rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: 1.6rem;
+      font-weight: 400;
+    }
+
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.4rem, 8vw, 6rem);
+      font-weight: 300;
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+      margin-bottom: 1.8rem;
+      color: var(--deep);
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--terracotta);
+    }
+
+    .hero-sub {
+      font-size: 1.05rem;
+      line-height: 1.75;
+      color: var(--muted);
+      font-weight: 300;
+      max-width: 480px;
+      margin: 0 auto 2.8rem;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.85rem 2.4rem;
+      border-radius: 50px;
+      font-size: 0.82rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.28s;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--terracotta);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background: #b5623d;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(200,113,74,0.28);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--deep);
+      border: 1.5px solid var(--sand);
+      margin-left: 1rem;
+    }
+
+    .btn-outline:hover {
+      border-color: var(--terracotta);
+      color: var(--terracotta);
+    }
+
+    /* ââ DIVIDER ââ */
+    .divider {
+      width: 60px;
+      height: 1px;
+      background: var(--terracotta);
+      margin: 0 auto;
+      opacity: 0.5;
+    }
+
+    /* ââ ABOUT ââ */
+    .about {
+      padding: 6rem 2rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .about-image-placeholder {
+      aspect-ratio: 4/5;
+      background: var(--sand);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-size: 0.82rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .about-text .section-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: 1rem;
+    }
+
+    .about-text h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 400;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+    }
+
+    .about-text p {
+      font-size: 0.95rem;
+      line-height: 1.85;
+      color: var(--muted);
+      font-weight: 300;
+      margin-bottom: 1rem;
+    }
+
+    /* ââ FEATURES ââ */
+    .features {
+      background: var(--deep);
+      padding: 6rem 2rem;
+      text-align: center;
+    }
+
+    .features-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .features .section-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: 1rem;
+    }
+
+    .features h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 300;
+      color: var(--cream);
+      margin-bottom: 3.5rem;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2.5rem;
+      margin-top: 3rem;
+    }
+
+    .feature-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 8px;
+      padding: 2.4rem 2rem;
+      text-align: left;
+      transition: border-color 0.25s;
+    }
+
+    .feature-card:hover {
+      border-color: rgba(200,113,74,0.4);
+    }
+
+    .feature-icon {
+      font-size: 1.6rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .feature-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      font-weight: 500;
+      color: var(--cream);
+      margin-bottom: 0.7rem;
+    }
+
+    .feature-card p {
+      font-size: 0.88rem;
+      line-height: 1.75;
+      color: rgba(250,248,244,0.5);
+      font-weight: 300;
+    }
+
+    /* ââ CTA ââ */
+    .cta {
+      padding: 7rem 2rem;
+      text-align: center;
+    }
+
+    .cta-inner {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .cta h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      font-weight: 300;
+      margin-bottom: 1.2rem;
+    }
+
+    .cta p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.8;
+      font-weight: 300;
+      margin-bottom: 2.5rem;
+    }
+
+    /* ââ FOOTER ââ */
+    footer {
+      border-top: 1px solid var(--sand);
+      padding: 2rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    footer .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      color: var(--deep);
+      text-decoration: none;
+    }
+
+    /* ââ RESPONSIVE ââ */
+    @media (max-width: 768px) {
+      nav { padding: 1.2rem 1.5rem; }
+      .nav-links { display: none; }
+      .about { grid-template-columns: 1fr; gap: 2.5rem; }
+      .features-grid { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: 0.8rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">Ayah</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#features">Features</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <p class="hero-eyebrow">Welcome to Ayah</p>
+      <h1 class="hero-title">Something <em>beautiful</em><br>is coming.</h1>
+      <p class="hero-sub">
+        A place to share your story, your work, and everything that matters to you.
+        Crafted with intention.
+      </p>
+      <a href="#about" class="btn btn-primary">Explore</a>
+      <a href="#contact" class="btn btn-outline">Get in touch</a>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="about-image-placeholder">Your image here</div>
+    <div class="about-text">
+      <p class="section-label">About</p>
+      <h2>A space made with care</h2>
+      <p>
+        This is your place to introduce yourself, your project, or your brand.
+        Update this section with your own words â what you do, what you believe in,
+        and what makes you unique.
+      </p>
+      <p>
+        Simple, elegant, and yours.
+      </p>
+      <br/>
+      <a href="#features" class="btn btn-primary">Learn more</a>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features" id="features">
+    <div class="features-inner">
+      <p class="section-label">What we offer</p>
+      <h2>Everything you need</h2>
+      <div class="divider" style="background:rgba(200,113,74,0.5);margin-bottom:0;"></div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">â¦</div>
+          <h3>Beautiful Design</h3>
+          <p>Every detail is considered â from typography to spacing â so your content always looks its best.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">â</div>
+          <h3>Your Story</h3>
+          <p>Share what matters most in a space that reflects your voice and your vision.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">â</div>
+          <h3>Built to Last</h3>
+          <p>Clean, fast, and accessible â a foundation you can build on for years to come.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta" id="contact">
+    <div class="cta-inner">
+      <h2>Let's connect</h2>
+      <p>
+        Have a question or want to work together? Reach out â I'd love to hear from you.
+      </p>
+      <a href="mailto:your@email.com" class="btn btn-primary">Say hello</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <a href="#" class="footer-logo">Ayah</a>
+    <span>Â© 2026 Ayah. All rights reserved.</span>
+  </footer>
+
+</body>
+</html>
