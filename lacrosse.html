@@ -85,6 +85,39 @@
       z-index: 1;
     }
 
+    /* Tabs */
+    .tabs {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+      border-bottom: 2px solid var(--mint);
+      padding-bottom: 0;
+    }
+    .tab-btn {
+      background: none;
+      border: none;
+      padding: 0.7rem 1.4rem;
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 800;
+      color: var(--muted);
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      margin-bottom: -2px;
+      letter-spacing: 0.04em;
+      transition: color 0.2s, border-color 0.2s;
+      border-radius: 8px 8px 0 0;
+    }
+    .tab-btn:hover { color: var(--green); }
+    .tab-btn.active {
+      color: var(--green);
+      border-bottom-color: var(--green);
+      background: var(--mint);
+    }
+
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
     main { max-width: 720px; margin: 0 auto; padding: 2.5rem 1.2rem 4rem; }
 
     .section-label {
@@ -96,6 +129,49 @@
       margin: 0 0 1.2rem;
     }
 
+    /* Info link cards */
+    .links-grid { display: flex; flex-direction: column; gap: 0.85rem; }
+
+    .link-card {
+      display: flex;
+      align-items: center;
+      gap: 1.1rem;
+      background: #fff;
+      border: 2px solid var(--mint);
+      border-radius: 16px;
+      padding: 1.05rem 1.3rem;
+      text-decoration: none;
+      color: var(--dark);
+      transition: all 0.22s;
+      box-shadow: 0 2px 8px rgba(45,106,79,0.06);
+    }
+    .link-card:hover {
+      border-color: var(--green-lt);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(45,106,79,0.14);
+      background: var(--mint);
+    }
+    .card-icon {
+      width: 46px;
+      height: 46px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      font-weight: 900;
+      flex-shrink: 0;
+    }
+    .icon-doc  { background: #e8f0fe; color: #2563eb; }
+    .icon-cal  { background: #fff3cd; color: #b45309; }
+    .icon-sport { background: #d8f3dc; color: var(--green); }
+    .card-text { flex: 1; }
+    .card-title { font-weight: 800; font-size: 1rem; line-height: 1.2; }
+    .card-desc { font-size: 0.82rem; color: var(--muted); margin-top: 0.15rem; font-weight: 600; }
+    .card-arrow { font-size: 1.2rem; color: var(--green-lt); transition: transform 0.2s; font-weight: 700; }
+    .link-card:hover .card-arrow { transform: translateX(4px); color: var(--green); }
+
+    /* Video cards */
     .videos-grid {
       display: flex;
       flex-direction: column;
@@ -139,50 +215,75 @@
     <a href="index.html" class="back-link">&larr; Back to my links</a>
     <span class="header-icon">&#127944;</span>
     <h1 class="header-title">Lacrosse</h1>
-    <p class="header-sub">My favourite videos</p>
+    <p class="header-sub">Player &middot; Team &middot; Season</p>
   </header>
 
   <main>
 
-    <p class="section-label">Watch &bull; 6 Videos</p>
-    <div class="videos-grid">
+    <div class="tabs">
+      <button class="tab-btn active" onclick="switchTab('info', this)">&#8505; Info</button>
+      <button class="tab-btn" onclick="switchTab('videos', this)">&#9654; Videos</button>
+    </div>
 
-      <div class="video-card">
-        <div class="video-wrapper">
-          <iframe src="https://www.youtube.com/embed/hJrNHWJEYa4" title="Lacrosse video 1" allowfullscreen></iframe>
-        </div>
+    <!-- INFO TAB -->
+    <div id="tab-info" class="tab-panel active">
+      <p class="section-label">Team Info</p>
+      <div class="links-grid">
+
+        <a href="https://www.franklinma.gov/DocumentCenter/View/5066/5-6-Rosters--Schedule?bidId=" target="_blank" class="link-card">
+          <div class="card-icon icon-doc">&#128196;</div>
+          <div class="card-text">
+            <div class="card-title">Roster &amp; Schedule</div>
+            <div class="card-desc">Grade 5&ndash;6 team roster and game schedule</div>
+          </div>
+          <span class="card-arrow">&rarr;</span>
+        </a>
+
       </div>
+    </div>
 
-      <div class="video-card">
-        <div class="video-wrapper">
-          <iframe src="https://www.youtube.com/embed/26b_aesIafk" title="Lacrosse video 2" allowfullscreen></iframe>
+    <!-- VIDEOS TAB -->
+    <div id="tab-videos" class="tab-panel">
+      <p class="section-label">Watch &bull; 6 Videos</p>
+      <div class="videos-grid">
+
+        <div class="video-card">
+          <div class="video-wrapper">
+            <iframe src="https://www.youtube.com/embed/hJrNHWJEYa4" title="Lacrosse video 1" allowfullscreen></iframe>
+          </div>
         </div>
-      </div>
 
-      <div class="video-card">
-        <div class="video-wrapper">
-          <iframe src="https://www.youtube.com/embed/qne2oBCOPNU" title="Lacrosse video 3" allowfullscreen></iframe>
+        <div class="video-card">
+          <div class="video-wrapper">
+            <iframe src="https://www.youtube.com/embed/26b_aesIafk" title="Lacrosse video 2" allowfullscreen></iframe>
+          </div>
         </div>
-      </div>
 
-      <div class="video-card">
-        <div class="video-wrapper">
-          <iframe src="https://www.youtube.com/embed/psBgWXV2mVs" title="Lacrosse video 4" allowfullscreen></iframe>
+        <div class="video-card">
+          <div class="video-wrapper">
+            <iframe src="https://www.youtube.com/embed/qne2oBCOPNU" title="Lacrosse video 3" allowfullscreen></iframe>
+          </div>
         </div>
-      </div>
 
-      <div class="video-card">
-        <div class="video-wrapper">
-          <iframe src="https://www.youtube.com/embed/i802zDEarQg" title="Lacrosse video 5" allowfullscreen></iframe>
+        <div class="video-card">
+          <div class="video-wrapper">
+            <iframe src="https://www.youtube.com/embed/psBgWXV2mVs" title="Lacrosse video 4" allowfullscreen></iframe>
+          </div>
         </div>
-      </div>
 
-      <div class="video-card">
-        <div class="video-wrapper">
-          <iframe src="https://www.youtube.com/embed/7deaRXF70Q8" title="Lacrosse video 6" allowfullscreen></iframe>
+        <div class="video-card">
+          <div class="video-wrapper">
+            <iframe src="https://www.youtube.com/embed/i802zDEarQg" title="Lacrosse video 5" allowfullscreen></iframe>
+          </div>
         </div>
-      </div>
 
+        <div class="video-card">
+          <div class="video-wrapper">
+            <iframe src="https://www.youtube.com/embed/7deaRXF70Q8" title="Lacrosse video 6" allowfullscreen></iframe>
+          </div>
+        </div>
+
+      </div>
     </div>
 
   </main>
@@ -190,6 +291,15 @@
   <footer>
     Made with <span>&hearts;</span> &middot; Ayah's Links
   </footer>
+
+  <script>
+    function switchTab(name, btn) {
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById('tab-' + name).classList.add('active');
+      btn.classList.add('active');
+    }
+  </script>
 
 </body>
 </html>
